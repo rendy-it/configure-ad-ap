@@ -35,126 +35,72 @@ This tutorial outlines how to configure Account Policies in Active Directory usi
 
 <h2> << Step 1: Configure Group Policy to Lockout the account after 5 attempts. >> </h2>
 <p>
-<img width="372" height="364" alt="Step 1" src="https://github.com/user-attachments/assets/c52606d9-c394-409c-b7a7-fbb0edf07071" /> <img width="53" height="364" alt="Right Arrow for Step 1_1a" src="https://github.com/user-attachments/assets/02fec441-0c57-4cba-89ea-b284105715ba" /> <img width="371" height="364" alt="Step 1a" src="https://github.com/user-attachments/assets/e0427367-3448-4966-b035-795b79085809" />
-
-
+<img width="2198" height="764" alt="Step 1_1a" src="https://github.com/user-attachments/assets/d54d4307-f801-4f8d-a02e-a1555613c0cc" />
 
 
 
 </p>
 <p>
   
-- On the Azure home page, hover you mouse cursor on “Virtual Machines”.
-- A small window will appear, then click on “Create”.
-- Then select “Virtual Machine”. 
-
-
-</p>
-<br />
-<p>
-<img width="686" height="1007" alt="Step 1b" src="https://github.com/user-attachments/assets/5ef2f882-c6bb-4a32-b62d-4c3eaa6ae5d4" />
-
-
-<p>
-  
-- On the next page, select your resource group.
-  - Give the VM a name (DC-1).
-  - Select a Zone.
-  - Select “Windows Server 2022” for the OS image.
-  - And select at least 2 vcpus, with 8 or 16 gig memory.
-
-
-  
-</p>
-<br />
-<p>
-<img width="614" height="317" alt="Step 1c" src="https://github.com/user-attachments/assets/daa109ac-5421-4835-b8c9-53b71b6d74d1" />
-
-
-</p>
-<p>
-  
-- Next, create a Username and Password
-
-
-</p>
-<br />
-<p>
-<img width="777" height="283" alt="Step 1d" src="https://github.com/user-attachments/assets/624aba38-fc57-4df9-8340-488883b09528" />
-
-
-</p>
-<p>
-  
-- Next, go to the “Networking” tab.
-
-</p>
-<br />
-<p>
-<img width="777" height="283" alt="Step 1d" src="https://github.com/user-attachments/assets/624aba38-fc57-4df9-8340-488883b09528" />
-
-
-</p>
-<p>
-  
-- On the next page:
-  - Make sure to select the same Virtual Network as the Windows VM that we used from previous projects.
-  - Everything else is set by default.
-
-
-</p>
-<br />
-<p>
-<img width="739" height="331" alt="Step 1f" src="https://github.com/user-attachments/assets/a3b074f2-61f3-42da-8d3b-e8bcf233029b" />
-
-
-</p>
-<p>
-  
-- Go back to the “Basics” tab.
-- Scroll to the bottom and select “Review + Create”.
+- Login to the DC-1 VM using RDP under “mydomain.com\jane_admin”.
+- Then in the search bar, type in “gpmc.msc” and open it. This will open the windows Group Policy Management Console.
+- Then select the “Default Domain Policy” under the “mydomain.com” tab that is under “Domains” and right click the click on “Edit”.
 
 
 
 </p>
 <br />
 <p>
-<img width="431" height="1009" alt="Step 1g" src="https://github.com/user-attachments/assets/883fb488-e5fa-4087-89e0-0c06d81a3b81" />
+<img width="1715" height="813" alt="Step 1a1" src="https://github.com/user-attachments/assets/852950ba-b51a-4c66-ac77-b3004f446a63" />
 
+
+<p>
+  
+- Next, In the Group Policy Management Editor, expand the following: Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Account Lockout Policy.
+- Then select “Account lockout threshold” and input the number of invalid logo attempts. In this case we will use 5 attempts. Click Apply then Ok.
+- You can now exit out of everything.
+
+
+  
+</p>
+<br />
+
+
+<h2> << Step 2: Log into the DC-1 VM and try to lockout a user account previously created >> </h2>
+
+<p>
+<img width="2105" height="856" alt="Step 2x_2" src="https://github.com/user-attachments/assets/9881f179-ce7e-453d-a6fb-c781dc167448" />
 
 
 </p>
 <p>
   
-- On the next Page:
-  - Double Check to make sure everything is to your liking.
-  - Then select “Create”.
-  - Once completed you can click on “Go to resource”.
-  - Then you will be able to see the VM that you just created with all the information.
-
+- Back in the DC-1 VM, open “Active Directory Users and Computers”.
+- Go to the “_EMPLOYEES” folder and select a random user. In my case I will select “duf.sat”. With this user we are going to attempt to log into the Client-1 VM 6 times with a bad password to get that user account locked out.
 
 
 
 </p>
 <br />
 
-
-<h2> << Step 2: Use the Windows-VM that we used from previous projects to be the Client >> </h2>
-
 <p>
-<img width="771" height="974" alt="Step 0" src="https://github.com/user-attachments/assets/1ed00524-e11e-4efc-9739-65cb5d858437" />
+<img width="1533" height="672" alt="Step 2a_2a1" src="https://github.com/user-attachments/assets/79be5272-936c-4aba-b380-252331ac6117" />
 
 
 </p>
 <p>
   
-- For the client VM we are going to use the Windows VM that we created in a previous project referenced [here](https://github.com/rendy-it/azure-vm).
-- If you have not created one before just follow the exact steps for the Windows 10 VM created from that project.
-- Once you are done, head back to the VM page of your Azure Resource Group and your Windows 10 VM should be there alongside your DC-1 VM.
+- Now using RDP try to log into the Client-1 VM with the random user “duf.sat” with the username “mydomain.com\duf.sat”.
+- Next make sure to only input false passwords. Do this 6 times and the user account should now be locked out.
+- You will get a warning message letting you know that the account has been locked out.
+- Now if you try to log into that account with the correct password, you will get an error message.
 
+
+  
 
 </p>
 <br />
+
 
 <h2> << Step 3: Set the Domain Controller’s VM’s private IP to static and disable the Windows Firewall >> </h2>
 
