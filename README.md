@@ -102,87 +102,53 @@ This tutorial outlines how to configure Account Policies in Active Directory usi
 <br />
 
 
-<h2> << Step 3: Set the Domain Controller’s VM’s private IP to static and disable the Windows Firewall >> </h2>
+<h2> << Step 3: Re-Enable the account after it has been disabled and reset the password >> </h2>
 
 
 <p>
-<img width="366" height="433" alt="Step 2" src="https://github.com/user-attachments/assets/9e0b69b2-6eb9-4e33-af3c-e386ea0d9fd5" /><img width="72" height="433" alt="Right Arrow for Step 2_2a" src="https://github.com/user-attachments/assets/9f868247-3e48-4bff-bba8-b8b7cf678aa9" />
-<img width="366" height="433" alt="Step 2a" src="https://github.com/user-attachments/assets/424228bd-2fb3-432b-8d43-022bc99b0c5b" />
+<img width="1896" height="599" alt="Step 3_3a" src="https://github.com/user-attachments/assets/7cb31cdd-e2f5-4414-bd1f-d79665e2a984" />
 
 
 
 <p>
   
-- After Creating the VMs, we need to set the DC VM’s NIC’s private ip address to be static.
-- Go to the DC-1 VM’s page in Azure and select “Network Settings”.
-- Then click on the “Network Interface / IP configuration”.
+- To unlock the account and re-enable it, go back to the DC-1 VM.
+- Open “Active Directory Users and Computers”. Right click on the “mydomain.com” tab and click on “Find…”.
+- Type in the name of the user account in my case is “duf.sat” and click on “Find Now”.
+
 
    
 </p>
 <br />
 <p>
-<img width="336" height="594" alt="Step 2a1" src="https://github.com/user-attachments/assets/1858cc82-6cd2-4913-8ce9-b93b0110f9be" /><img width="81" height="594" alt="Right Arrow for Step 2a1_2a1a" src="https://github.com/user-attachments/assets/1063d4fe-7064-4b8d-8f99-cd5470f4ff7b" /><img width="337" height="594" alt="Step 2a1a" src="https://github.com/user-attachments/assets/7c58bb4e-5d6c-4824-a5d6-1c0896529727" />
+<img width="1896" height="717" alt="Step 3a1_3a2" src="https://github.com/user-attachments/assets/80126181-2e02-44d7-b1e8-851cccebfb3d" />
 
 
 
 <p>
 
   
-- Then, click on “ipconfig1” and change the Allocation from “Dynamic” to “Static” and click on “Save”.
-- Once you do that, the private IP address of DC-1 should no longer change.
+- Then right click on the user “duf.sat”, and select “Reset Password”.
+- Input the new password of your choosing, check the “Unlock the user’s account” box and then click on OK.
+- Now when you try to log into this account with the new password, it should be unlocked and you will be able to log in.
+
   
    
 </p>
 <br />
 <p>
-<img width="1186" height="440" alt="Step 2a2" src="https://github.com/user-attachments/assets/caef7ce6-352a-41ec-ae6d-081fea2c6b2e" />
-
-<p>
-  
-- Next, log into the DC-1 VM with RDP using the VM’s public IP address.
-   
-</p>
-<br />
-
-<p>
-<img width="886" height="761" alt="Step 2a3" src="https://github.com/user-attachments/assets/0a58343a-bd44-4afc-8ed4-3ab856015271" />
+<img width="1396" height="717" alt="Step 3a3" src="https://github.com/user-attachments/assets/7f3cfee8-53cc-45dd-b0d8-550ab7d3f115" />
 
 
 <p>
   
-- Then once logged in, you want to run “wf.msc” for windows firewall.
-
+- Just to test it out and be sure. Open up Windows Powershell and type the “whoami” command and it will result in the name of the user account.
    
 </p>
 <br />
 
-<p>
-<img width="836" height="626" alt="Step 2a4" src="https://github.com/user-attachments/assets/1f7d054a-00f5-4574-8cce-013780046f59" />
 
-
-<p>
-  
-- Then, select “Windows Defender Firewall Properties”.
-
-   
-</p>
-<br />
-
-<p>
-<img width="1400" height="454" alt="Step 2a5_2a6_2a7" src="https://github.com/user-attachments/assets/bd1f9db5-0e7f-4584-ae39-72c7850f7203" />
-
-
-
-<p>
-  
-- Then for the “Domain” “Private” and “Public” profile tabs make sure that “Firewall State” is off. Then select “Apply”.
-- Once that is done, the windows firewall for the DC-1 VM should be off.
-
-   
-</p>
-<br />
-
-<h2> << Step 4: Set the Windows- VM’s DNS settings to DC-1’s Private IP address >> </h2>
+<h2> << Step 4: Enabling and Disabling Accounts >> </h2>
 
 
 <p>
