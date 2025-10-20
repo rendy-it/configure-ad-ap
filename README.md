@@ -198,43 +198,19 @@ This tutorial outlines how to configure Account Policies in Active Directory usi
 </p>
 <br />
 
-<h2> << Step 5: Confirm network connectivity between the DC-1 VM and the Client VM >> </h2>
+<h2> << Step 5: Observe the logs of the DC-1 and Client-1 VMs to analyze security activity >> </h2>
 
 
 <p>
-<img width="643" height="460" alt="Step 5" src="https://github.com/user-attachments/assets/8fffb1e6-9414-4899-a1aa-0e6799651853" />
+<img width="2040" height="1143" alt="Step 5_5a" src="https://github.com/user-attachments/assets/225b7f14-7252-4de3-a5bf-5cf680e44b64" />
 
-
-<p>
-  
-- We are going to log in to the Client Windows-VM and attempt to ping DC-1s private IP address.
-- Make note of and copy your DC-1 VM’s private IP address.
-
-   
-</p>
-<br />
-
-<p>
-<img width="887" height="726" alt="Step 5a" src="https://github.com/user-attachments/assets/cbb7c728-f04a-4257-8833-5a8a6bc2b760" />
 
 
 <p>
   
-- Log in to the Windows VM using RDP.
-- Then you want to open “PowerShell”
-
-   
-</p>
-<br />
-
-<p>
-<img width="761" height="534" alt="Step 5a1" src="https://github.com/user-attachments/assets/074dd991-92d4-4638-99a2-7f900d3eeba8" />
-
-
-<p>
-  
-- Then type “ping” and paste the DC-1 private IP number.
-- Example: “ping 10.1.0.5” then press enter and it should ping successfully.
+- First, we are going to the DC-1 VM and open “Event Viewer” in the search bar.
+- Then expand Windows Logs > Security.
+- There you will be able to see all the event logs which occurred in the DC-1 VM.
 
 
    
@@ -242,13 +218,42 @@ This tutorial outlines how to configure Account Policies in Active Directory usi
 <br />
 
 <p>
-<img width="699" height="867" alt="Step 5a2" src="https://github.com/user-attachments/assets/50dee3fc-0f73-4839-923d-e7c8fd1ff1d4" />
+<img width="1691" height="1142" alt="Step 5b" src="https://github.com/user-attachments/assets/b6c7d7f4-b6e1-400a-a842-5aca8e3ea4e4" />
+
 
 
 <p>
   
-- Next, type “ipconfig /all” and it should give us results in which will show DC-1’s private IP address.
-- The network connectivity attempt between both VMs is now complete.
+- Next, we are going to the Client-1 VM and open “Event Viewer” and follow the same steps as above.
+- This time you will see that you are not able to see the security logs. That is because the user, which in my case is “duf.sat”, does not have admin access.
+
+
+   
+</p>
+<br />
+
+<p>
+<img width="1472" height="751" alt="Step 5b1_5b2" src="https://github.com/user-attachments/assets/17475a0c-f3d7-42c6-80e0-a851ce53af3b" />
+
+
+
+<p>
+  
+- To bypass this, run “Even Viewer” as an administrator. And input the “jane_admin” credentials.
+
+
+   
+</p>
+<br />
+
+<p>
+<img width="1746" height="1241" alt="Step 5b3" src="https://github.com/user-attachments/assets/b5474b16-a8f6-47ff-aff6-1b1bd4513c8f" />
+
+
+
+<p>
+  
+- Then, now you will be able to see the Security logs of this user account. Logs such as account lockouts and failed login attempts and other types of authentication events. 
 
 
    
@@ -264,7 +269,7 @@ This tutorial outlines how to configure Account Policies in Active Directory usi
 - Close the Remote Desktop connection.
 - Go Back to your Azure resource group page.
 - Also, make sure your VMs are on “Stop” status if you are not going to use them right away. This way you will not be charged while they are not in use.
-- To conclude, we have successfully implemented the on-premises of Active Directory within Virtual machines on the Azure Cloud infrastructure. 
+- To conclude, we have successfully configured Account Policies in Active Directory using Group Policy to improve security and user authentication in Virtual machines on the Azure Cloud infrastructure. 
 
 
 </p>
