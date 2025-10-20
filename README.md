@@ -152,24 +152,29 @@ This tutorial outlines how to configure Account Policies in Active Directory usi
 
 
 <p>
-<img width="563" height="432" alt="Step 4" src="https://github.com/user-attachments/assets/20b4b043-42a2-42ce-902d-bc895e6ecef7" />
+<img width="1896" height="717" alt="Step 4_4a" src="https://github.com/user-attachments/assets/66cd1fb5-e91c-40f4-b9b9-5fddb6b1304d" />
 
 
 <p>
   
-- Go to the DC-1 VM page. Make note and copy the private IP address.
+- Back in the DC-1 VM. Open “Active Directory Users and Computers”.
+- We are going to use the same user in Step 3 to do this step. Search for “duf.sat” once again.
+- Once you find the user, right click and click on “Disable Account”.
+
    
 </p>
 <br />
 
 <p>
-<img width="893" height="506" alt="Step 4a" src="https://github.com/user-attachments/assets/bcab426f-ca02-4c3d-9634-730d911d9b07" />
+<img width="1896" height="717" alt="Step 4a1_4a2" src="https://github.com/user-attachments/assets/1dab3c81-f129-4c9f-ad98-5c866b69d68a" />
+
 
 
 <p>
   
-- Go to the Windows-VM page and select “Network Settings”
-- Then click on the “Network Interface / IP configuration”.
+- Once disabled, if you look at the icon, you will now see a down arrow signifying that the account has been disabled.
+- Then, when you try and log into that account in the Client VM, you will get a message signaling that the account has been disabled.
+
 
  
    
@@ -177,25 +182,18 @@ This tutorial outlines how to configure Account Policies in Active Directory usi
 <br />
 
 <p>
-<img width="758" height="449" alt="Step 4a1" src="https://github.com/user-attachments/assets/8e5779c5-9261-47cb-b3b9-b3400325d389" />
+<img width="1896" height="717" alt="Step 4b_4b1" src="https://github.com/user-attachments/assets/fd2293f2-d387-4d77-8866-b0c9ccd161d5" />
 
-
-<p>
-  
-- Then select the “DNS servers” tab on the left.
-- Then, select “Custom” and paste the DC-1 VM private IP address number. Then select “Save”.
-
-   
-</p>
-<br />
-
-<p>
-<img width="1458" height="403" alt="Step 4a3" src="https://github.com/user-attachments/assets/2efa9048-196d-4a07-8961-90010f6309db" />
 
 
 <p>
   
-- The DNS configuration is now complete. To make sure all changes have been applied. Go back to your Azure VMs page and restart all the VMs.
+- To re-enable the user account, go back to “Active Directory Users and Computers” back in the DC-1 VM.
+- Once you search and find the user, right click and click on “Enable Account”. Normally this is not as simple in the real world since there is usually a reason why the user account is disabled. But we will keep it simple here for the sake of the project.
+- Now if you search for the user again, you will notice that the down arrow is gone on the icon.
+- Then, when you try to log back into the user account in the Client VM, you should be able to log in now which means the account has been re-enabled.
+
+
    
 </p>
 <br />
